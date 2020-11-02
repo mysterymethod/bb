@@ -1,4 +1,3 @@
-import classes from '*.module.css';
 import React from 'react';
 
 import classes from './BuildControl.module.css';
@@ -15,4 +14,4 @@ const buildControl = (props) => {
     );
 }
 
-default export buildControl;
+export default buildControl;
