@@ -20,6 +20,7 @@ const sideDrawer = (props) => {
                 <Logo height='11%' />
                 <NavigationItems />
             </div>
+            
         </Aux>
         
     );
