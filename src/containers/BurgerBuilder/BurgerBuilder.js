@@ -27,10 +27,11 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount() {
+        
         axios.get('/ingredients.json')
             .then(res => {
                 this.setState({ingredients: res.data});
-                console.log('************************************');
+                
             })
             .catch(err => console.log(err));
     }
@@ -48,29 +49,39 @@ class BurgerBuilder extends Component {
     }
 
     purchasingContinueHandler = () => {
-        // alert('Order Placed!');
+    
+        // this.setState({loading: true});
 
-        this.setState({loading: true});
+        // const data = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.price,
+        //     customer: {
+        //         name: 'raftaar',
+        //         city: 'london',
+        //     },
+        //     deliveryMethod: 'fastest',
+        // }
 
-        const data = {
-            ingredients: this.state.ingredients,
-            price: this.state.price,
-            customer: {
-                name: 'raftaar',
-                city: 'london',
-            },
-            deliveryMethod: 'fastest',
+        // axios.post('/orders.json', data)
+        //     .then(res => {
+        //         this.setState({loading: false, purchasing: false});
+        //     })
+        //     .catch(err => {
+        //         this.setState({loading: false, purchasing: false});
+        //     })
+
+        let arr = [];
+
+        for (let i in this.props.ingredients) {
+            arr.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
         }
 
-        axios.post('/orders.json', data)
-            .then(res => {
-                this.setState({loading: false, purchasing: false});
-            })
-            .catch(err => {
-                this.setState({loading: false, purchasing: false});
-            })
+        const arrString = arr.join('&');
 
-
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + arrString
+        });
     }
 
     addIngredientHandler = (type) => {
