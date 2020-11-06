@@ -72,7 +72,7 @@ class BurgerBuilder extends Component {
 
         let arr = [];
 
-        for (let i in this.props.ingredients) {
+        for (let i in this.state.ingredients) {
             arr.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
         }
 
