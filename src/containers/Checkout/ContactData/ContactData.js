@@ -4,17 +4,55 @@ import classes from './ContactData.module.css';
 import Button from '../../../components/UI/Button/Button';
 import axios from '../../../axios.orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import Input from '../../../components/UI/Input/Input';
 
 class ContactData extends Component {
 
     state = {
-        name: null,
-        email: null,
-        address: {
-            city: null,
-            code: null,
-        },
-        loading: false,
+        orderForm: {
+            name: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Name'
+                },
+                value: '',
+            },
+            email: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'email',
+                    placeholder: 'Your Email'
+                },
+                value: '',
+            },
+            city: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your City'
+                },
+                value: '',
+            },
+            pinCode: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your PinCode'
+                },
+                value: '',
+            },
+            deliveryMethod: {
+                elementType: 'select',
+                elementConfig: {
+                    options: [
+                        {value: 'fastest', displayValue: 'Fastest'},
+                        {value: 'cheapest', displayValue: 'Cheapest'},
+                    ]
+                },
+                value: '',
+            }
+        }
     }
 
     orderhandler = (event) => {
@@ -50,13 +88,13 @@ class ContactData extends Component {
 
         let form = (
             <form>
-                <input className={classes.Input} type='text' name='name' placeholder='Your Name' />
-                <input className={classes.Input} type='email' name='email' placeholder='Your Email' />
-                <input className={classes.Input} type='text' name='city' placeholder='Your City' />
-                <input className={classes.Input} type='text' name='code' placeholder='Your PinCode' />
+                <Input inputtype='input' type='text' name='name' placeholder='Your Name' />
+                <Input inputtype='input' type='email' name='email' placeholder='Your Email' />
+                <Input inputtype='input' type='text' name='city' placeholder='Your City' />
+                <Input inputtype='input' type='text' name='code' placeholder='Your PinCode' />
                 <Button btnType={'Success'} clicked={this.orderhandler} >ORDER</Button>
             </form>
-        );
+        ); 
 
         if (this.props.loading) {
             form = <Spinner />
